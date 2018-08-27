@@ -1,14 +1,11 @@
 p: button Focusable element before
 
 form action="." method="GET"
-  label> for="filter" Filter for programming languages
-  input#filter type="text" name="filter" autocomplete="off" aria-describedby="description alerts"
+  label for="filter" Programming language
+  input#filter type="text" name="filter" autocomplete="off" aria-expanded="false" aria-describedby="description alerts"
 
-  #description
-    p Filter: enter text. Toggle: up/down key or click option below input. Reset: escape key.
-
-  fieldset
-    legend Programming languages
+  fieldset hidden=true
+    legend Programming language suggestions
 
     #alerts
 
@@ -18,6 +15,9 @@ form action="." method="GET"
       label for=id
         input id=id type="radio" name="language" value=i
         = language
-        br
+
+  #description
+    p Provides auto-suggestions.
+    p Show: up/down/space key. Filter: enter text. Toggle: up/down key. Select: enter key (while toggling) or click option below input. Reset: escape key.
 
 p: button Focusable element after
