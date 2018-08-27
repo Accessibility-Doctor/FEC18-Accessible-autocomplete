@@ -7,7 +7,7 @@
       this.$text = this.$el.find('input[type="text"]');
       this.$fieldset = this.$el.find('fieldset');
       this.$radios = this.$fieldset.find('input[type="radio"]');
-      this.$alerts = this.$el.find('#alerts');
+      this.$alerts = this.$el.find('.alerts');
       this.applyCheckedOptionToInput();
       this.announceOptionsCount('');
       this.attachEvents();
@@ -114,7 +114,7 @@
       var message;
       this.$alerts.find('p').remove(); // Remove previous alerts
       message = filter === '' ? `${count} options in total` : `${count} of ${this.$radios.length} options for <kbd>${filter}</kbd>`;
-      return this.$alerts.append(`<p role='alert'>${message}</p>`);
+      return this.$alerts.append(`<p>${message}</p>`);
     }
 
     // See https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
