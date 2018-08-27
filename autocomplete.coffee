@@ -5,7 +5,7 @@ class Autocomplete
     @$text     = @$el.find('input[type="text"]')
     @$fieldset = @$el.find('fieldset')
     @$radios   = @$fieldset.find('input[type="radio"]')
-    @$alerts   = @$el.find('.alerts')
+    @$alerts   = @$el.find('#alerts')
 
     @applyCheckedOptionToInput()
     @announceOptionsCount('')
@@ -111,7 +111,7 @@ class Autocomplete
               else
                 "#{count} of #{@$radios.length} options for <kbd>#{filter}</kbd>"
 
-    @$alerts.append("<p>#{message}</p>")
+    @$alerts.append("<p role='alert'>#{message}</p>")
 
   # See https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
   fuzzifyFilter: (filter) ->
