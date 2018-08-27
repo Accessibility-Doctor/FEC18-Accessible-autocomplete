@@ -1,0 +1,61 @@
+.visually-hidden, legend, input[type="radio"] {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+fieldset {
+  position: absolute;
+  z-index: 1;
+  background-color: lightyellow;
+  border: 1px solid;
+  padding: 5px 0;
+  margin: -1px 0 0 200px;
+  width: 164px;
+}
+fieldset label:not([hidden]) {
+  display: block;
+  width: 100%;
+}
+fieldset label:not([hidden]):hover, fieldset label:not([hidden]).selected {
+  cursor: pointer;
+  background-color: #000;
+  color: lightyellow;
+}
+
+#alerts {
+  margin: 0 0 6px 0;
+  font-style: italic;
+}
+#alerts kbd {
+  background-color: #000;
+  border-radius: 4px;
+  padding: 2px;
+  color: lightyellow;
+}
+#alerts p {
+  margin: 0;
+}
+
+input[type="text"] {
+  width: 160px;
+}
+
+form > label {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+
+#description {
+  margin-left: 200px;
+}
+#description p {
+  margin-top: 0;
+}
+#description p:last-child {
+  display: none;
+}

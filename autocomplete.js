@@ -14,22 +14,42 @@
     }
 
     attachEvents() {
+      this.attachClickEventToInput();
       this.attachChangeEventToInput();
       this.attachEscapeKeyToInput();
+      this.attachSpaceKeyToInput();
+      this.attachEnterKeyToInput();
+      this.attachTabKeyToInput();
       this.attachUpDownKeysToInput();
-      return this.attachChangeEventToOptions();
+      this.attachChangeEventToOptions();
+      this.attachClickEventToOptions();
+      return this.attachFocusOut();
+    }
+
+    attachClickEventToInput() {
+      return this.$text.click(() => {
+        if (!this.$fieldset.attr('hidden')) {
+          return this.hideOptions();
+        } else {
+          return this.showOptions();
+        }
+      });
     }
 
     attachChangeEventToInput() {
       return this.$text.on('input propertychange paste', (e) => {
-        return this.applyFilterToOptions(e.target.value);
+        this.applyFilterToOptions(e.target.value);
+        return this.showOptions();
       });
     }
 
     attachEscapeKeyToInput() {
       return this.$text.keydown((e) => {
         if (e.which === 27) {
-          if (this.$radios.is(':checked')) {
+          if (!this.$fieldset.attr('hidden')) {
+            this.applyCheckedOptionToInputAndResetOptions();
+            return e.preventDefault();
+          } else if (this.$radios.is(':checked')) {
             this.$radios.prop('checked', false);
             this.applyCheckedOptionToInputAndResetOptions();
             return e.preventDefault(); // Needed for automatic testing only
@@ -40,13 +60,53 @@
       });
     }
 
+    attachSpaceKeyToInput() {
+      return this.$text.keydown((e) => {
+        if (e.which === 32) {
+          if (this.$fieldset.attr('hidden') && this.$text.val() === '') {
+            this.showOptions();
+            return e.preventDefault(); // Needed for automatic testing only
+          } else {
+            return $('body').append('<p>Space passed on.</p>');
+          }
+        }
+      });
+    }
+
+    attachEnterKeyToInput() {
+      return this.$text.keydown((e) => {
+        if (e.which === 13) {
+          if (!this.$fieldset.attr('hidden')) {
+            this.applyCheckedOptionToInputAndResetOptions();
+            return e.preventDefault(); // Needed for automatic testing only
+          } else {
+            return $('body').append('<p>Enter passed on.</p>');
+          }
+        }
+      });
+    }
+
+    attachTabKeyToInput() {
+      return this.$text.keydown((e) => {
+        if (e.which === 9) {
+          if (!this.$fieldset.attr('hidden')) {
+            return this.applyCheckedOptionToInputAndResetOptions();
+          }
+        }
+      });
+    }
+
     attachUpDownKeysToInput() {
       return this.$text.keydown((e) => {
         if (e.which === 38 || e.which === 40) {
-          if (e.which === 38) {
-            this.walkThroughOptions('up');
+          if (!this.$fieldset.attr('hidden')) {
+            if (e.which === 38) {
+              this.walkThroughOptions('up');
+            } else {
+              this.walkThroughOptions('down');
+            }
           } else {
-            this.walkThroughOptions('down');
+            this.showOptions();
           }
           return e.preventDefault();
         }
@@ -56,8 +116,33 @@
     attachChangeEventToOptions() {
       return this.$radios.change((e) => {
         this.applyCheckedOptionToInput();
-        return this.$text.select();
+        return this.$text.focus().select();
       });
+    }
+
+    attachClickEventToOptions() {
+      return this.$radios.click((e) => {
+        return this.hideOptions();
+      });
+    }
+
+    attachFocusOut() {
+      return this.$el.focusout(() => {
+        if (!this.$fieldset.attr('hidden') && !this.$el.is(':hover')) {
+          this.applyCheckedOptionToInputAndResetOptions();
+          return this.hideOptions();
+        }
+      });
+    }
+
+    showOptions() {
+      this.$fieldset.removeAttr('hidden');
+      return this.$text.attr('aria-expanded', 'true');
+    }
+
+    hideOptions() {
+      this.$fieldset.attr('hidden', '');
+      return this.$text.attr('aria-expanded', 'false');
     }
 
     walkThroughOptions(direction) {
@@ -107,6 +192,7 @@
 
     applyCheckedOptionToInputAndResetOptions() {
       this.applyCheckedOptionToInput();
+      this.hideOptions();
       return this.applyFilterToOptions('');
     }
 
