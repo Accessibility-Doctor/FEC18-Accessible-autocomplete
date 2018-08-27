@@ -1,0 +1,18 @@
+p: button Focusable element before
+
+form action="." method="GET"
+  label> for="filter" Filter
+  input#filter type="text" name="filter"
+
+  fieldset
+    legend Programming languages
+
+    - [:ActionScript, :AppleScript, :Asp, :BASIC, :C, :Clojure, :COBOL, :ColdFusion, :Erlang, :Fortran, :Groovy, :Haskell, :Java, :JavaScript, :Lisp, :Perl, :PHP, :Python, :Ruby, :Scala, :Scheme].each_with_index do |language, i|
+      - id = language.downcase
+
+      label for=id
+        input id=id type="radio" name="language" value=i
+        = language
+        br
+
+p: button Focusable element after
