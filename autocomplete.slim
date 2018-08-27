@@ -2,10 +2,15 @@ p: button Focusable element before
 
 form action="." method="GET"
   label> for="filter" Filter
-  input#filter type="text" name="filter"
+  input#filter type="text" name="filter" autocomplete="off"
+
+  .description
+    p Filter: enter text. Toggle: up/down key or click option below input. Reset: escape key.
 
   fieldset
     legend Programming languages
+
+    .alerts
 
     - [:ActionScript, :AppleScript, :Asp, :BASIC, :C, :Clojure, :COBOL, :ColdFusion, :Erlang, :Fortran, :Groovy, :Haskell, :Java, :JavaScript, :Lisp, :Perl, :PHP, :Python, :Ruby, :Scala, :Scheme].each_with_index do |language, i|
       - id = language.downcase
