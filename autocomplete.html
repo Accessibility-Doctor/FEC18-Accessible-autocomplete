@@ -2,9 +2,15 @@
   <button>Focusable element before</button>
 </p>
 <form action="." method="GET">
-  <label for="filter">Filter</label> <input id="filter" name="filter" type="text" />
+  <label for="filter">Filter</label> <input autocomplete="off" id="filter" name="filter" type="text" />
+  <div class="description">
+    <p>
+      Filter: enter text. Toggle: up/down key or click option below input. Reset: escape key.
+    </p>
+  </div>
   <fieldset>
     <legend>Programming languages</legend>
+    <div class="alerts"></div>
     <label for="actionscript"><input id="actionscript" name="language" type="radio" value="0" />ActionScript<br /></label>
     <label for="applescript"><input id="applescript" name="language" type="radio" value="1" />AppleScript<br /></label>
     <label for="asp"><input id="asp" name="language" type="radio" value="2" />Asp<br /></label>
