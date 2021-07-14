@@ -13,3 +13,7 @@ Codepen: <https://codepen.io/jmuheim/pen/KKWddQg>
 ## Milestone 3: Enhancing accessibility
 
 Codepen: <https://codepen.io/jmuheim/pen/abJvvGY>
+
+## Milestone 4: Adding fancy styles
+
+Codepen: <https://codepen.io/jmuheim/pen/WNpQQKw>

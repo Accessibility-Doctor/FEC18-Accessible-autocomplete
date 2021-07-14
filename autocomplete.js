@@ -14,22 +14,42 @@
     }
 
     attachEvents() {
+      this.attachClickEventToInput();
       this.attachChangeEventToInput();
       this.attachEscapeKeyToInput();
+      this.attachSpaceKeyToInput();
+      this.attachEnterKeyToInput();
+      this.attachTabKeyToInput();
       this.attachUpDownKeysToInput();
       this.attachChangeEventToOptions();
+      this.attachClickEventToOptions();
+      this.attachFocusOut();
+    }
+
+    attachClickEventToInput() {
+      this.$text.click(() => {
+        if (!this.$fieldset.attr('hidden')) {
+          this.hideOptions();
+        } else {
+          this.showOptions();
+        }
+      });
     }
 
     attachChangeEventToInput() {
       this.$text.on('input propertychange paste', (e) => {
         this.applyFilterToOptions(e.target.value);
+        this.showOptions();
       });
     }
 
     attachEscapeKeyToInput() {
       this.$text.keydown((e) => {
         if (e.which === 27) {
-          if (this.$radios.is(':checked')) {
+          if (!this.$fieldset.attr('hidden')) {
+            this.applyCheckedOptionToInputAndResetOptions();
+            e.preventDefault();
+          } else if (this.$radios.is(':checked')) {
             this.$radios.prop('checked', false);
             this.applyCheckedOptionToInputAndResetOptions();
             e.preventDefault(); // Needed for automatic testing only
@@ -40,13 +60,53 @@
       });
     }
 
+    attachSpaceKeyToInput() {
+      this.$text.keydown((e) => {
+        if (e.which === 32) {
+          if (this.$fieldset.attr('hidden') && this.$text.val() === '') {
+            this.showOptions();
+            e.preventDefault(); // Needed for automatic testing only
+          } else {
+            $('body').append('<p>Space passed on.</p>');
+          }
+        }
+      });
+    }
+
+    attachEnterKeyToInput() {
+      this.$text.keydown((e) => {
+        if (e.which === 13) {
+          if (!this.$fieldset.attr('hidden')) {
+            this.applyCheckedOptionToInputAndResetOptions();
+            e.preventDefault(); // Needed for automatic testing only
+          } else {
+            $('body').append('<p>Enter passed on.</p>');
+          }
+        }
+      });
+    }
+
+    attachTabKeyToInput() {
+      this.$text.keydown((e) => {
+        if (e.which === 9) {
+          if (!this.$fieldset.attr('hidden')) {
+            this.applyCheckedOptionToInputAndResetOptions();
+          }
+        }
+      });
+    }
+
     attachUpDownKeysToInput() {
       this.$text.keydown((e) => {
         if (e.which === 38 || e.which === 40) {
-          if (e.which === 38) {
-            this.walkThroughOptions('up');
+          if (!this.$fieldset.attr('hidden')) {
+            if (e.which === 38) {
+              this.walkThroughOptions('up');
+            } else {
+              this.walkThroughOptions('down');
+            }
           } else {
-            this.walkThroughOptions('down');
+            this.showOptions();
           }
           e.preventDefault();
         }
@@ -56,8 +116,33 @@
     attachChangeEventToOptions() {
       this.$radios.change((e) => {
         this.applyCheckedOptionToInput();
-        this.$text;
+        this.$text.focus();
       });
+    }
+
+    attachClickEventToOptions() {
+      this.$radios.click((e) => {
+        this.hideOptions();
+      });
+    }
+
+    attachFocusOut() {
+      this.$el.focusout(() => {
+        if (!this.$fieldset.attr('hidden') && !this.$el.is(':hover')) {
+          this.applyCheckedOptionToInputAndResetOptions();
+          this.hideOptions();
+        }
+      });
+    }
+
+    showOptions() {
+      this.$fieldset.removeAttr('hidden');
+      this.$text.attr('aria-expanded', 'true');
+    }
+
+    hideOptions() {
+      this.$fieldset.attr('hidden', '');
+      this.$text.attr('aria-expanded', 'false');
     }
 
     walkThroughOptions(direction) {
@@ -107,6 +192,7 @@
 
     applyCheckedOptionToInputAndResetOptions() {
       this.applyCheckedOptionToInput();
+      this.hideOptions();
       this.applyFilterToOptions('');
     }
 
