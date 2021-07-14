@@ -1,3 +1,3 @@
-# FEC18-Accessible-autocomplete
+# Accessible autocomplete workshop
 
-https://codepen.io/accessibility-doctor/pen/ZMWjLp / http://tiny.cc/fec-m2
+Code for workshop [Complex and accessible JavaScript widgets (with simple HTML)](https://slides.com/jmuheim/accessible-js-widgets-simple-html/).
