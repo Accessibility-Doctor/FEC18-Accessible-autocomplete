@@ -3,7 +3,7 @@
 </p>
 
 <form action="." method="GET">
-  <label for="filter">Programming language</label> <input aria-describedby="description alerts" autocomplete="off" id="filter" name="filter" type="text" />
+  <label for="filter">Programming language</label><input aria-expanded="false" aria-describedby="description alerts" autocomplete="off" id="filter" name="filter" type="text" />
 
   <div id="description">
     <p>
@@ -11,7 +11,7 @@
     </p>
   </div>
 
-  <fieldset>
+  <fieldset hidden="hidden">
     <legend>Programming languages</legend>
     <div id="alerts"></div>
     <label for="actionscript"><input id="actionscript" name="language" type="radio" value="0" />ActionScript<br /></label>
