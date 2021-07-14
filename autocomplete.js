@@ -17,46 +17,46 @@
       this.attachChangeEventToInput();
       this.attachEscapeKeyToInput();
       this.attachUpDownKeysToInput();
-      return this.attachChangeEventToOptions();
+      this.attachChangeEventToOptions();
     }
 
     attachChangeEventToInput() {
-      return this.$text.on('input propertychange paste', (e) => {
-        return this.applyFilterToOptions(e.target.value);
+      this.$text.on('input propertychange paste', (e) => {
+        this.applyFilterToOptions(e.target.value);
       });
     }
 
     attachEscapeKeyToInput() {
-      return this.$text.keydown((e) => {
+      this.$text.keydown((e) => {
         if (e.which === 27) {
           if (this.$radios.is(':checked')) {
             this.$radios.prop('checked', false);
             this.applyCheckedOptionToInputAndResetOptions();
-            return e.preventDefault(); // Needed for automatic testing only
+            e.preventDefault(); // Needed for automatic testing only
           } else {
-            return $('body').append('<p>Esc passed on.</p>');
+            $('body').append('<p>Esc passed on.</p>');
           }
         }
       });
     }
 
     attachUpDownKeysToInput() {
-      return this.$text.keydown((e) => {
+      this.$text.keydown((e) => {
         if (e.which === 38 || e.which === 40) {
           if (e.which === 38) {
             this.walkThroughOptions('up');
           } else {
             this.walkThroughOptions('down');
           }
-          return e.preventDefault();
+          e.preventDefault();
         }
       });
     }
 
     attachChangeEventToOptions() {
-      return this.$radios.change((e) => {
+      this.$radios.change((e) => {
         this.applyCheckedOptionToInput();
-        return this.$text;
+        this.$text;
       });
     }
 
@@ -67,7 +67,7 @@
       currentIndex = $visibleOptions.index($visibleOptions.parent().find(':checked'));
       upcomingIndex = direction === 'up' ? currentIndex <= 0 ? maxIndex : currentIndex - 1 : currentIndex === maxIndex ? 0 : currentIndex + 1;
       $upcomingOption = $($visibleOptions[upcomingIndex]);
-      return $upcomingOption.prop('checked', true).trigger('change');
+      $upcomingOption.prop('checked', true).trigger('change');
     }
 
     applyCheckedOptionToInput() {
@@ -80,16 +80,16 @@
       if ($checkedOption.length === 1) {
         $checkedOptionLabel = $($checkedOption.parent()[0]);
         this.$text.val($.trim($checkedOptionLabel.text()));
-        return $checkedOptionLabel.addClass('selected');
+        $checkedOptionLabel.addClass('selected');
       } else {
-        return this.$text.val('');
+        this.$text.val('');
       }
     }
 
     applyFilterToOptions(filter) {
       var fuzzifiedFilter, visibleCount;
       fuzzifiedFilter = this.fuzzifyFilter(filter);
-      visibleCount = 0;
+      visibleCount = 0
       this.$radios.each((i, el) => {
         var $option, $optionContainer, regex;
         $option = $(el);
@@ -97,24 +97,24 @@
         regex = new RegExp(fuzzifiedFilter, 'i');
         if (regex.test($optionContainer.text())) {
           visibleCount++;
-          return $optionContainer.removeAttr('hidden');
+          $optionContainer.removeAttr('hidden');
         } else {
-          return $optionContainer.attr('hidden', '');
+          $optionContainer.attr('hidden', '');
         }
       });
-      return this.announceOptionsCount(filter, visibleCount);
+      this.announceOptionsCount(filter, visibleCount);
     }
 
     applyCheckedOptionToInputAndResetOptions() {
       this.applyCheckedOptionToInput();
-      return this.applyFilterToOptions('');
+      this.applyFilterToOptions('');
     }
 
     announceOptionsCount(filter = this.$text.val(), count = this.$radios.length) {
       var message;
       this.$alerts.find('p').remove(); // Remove previous alerts
       message = filter === '' ? `${count} options in total.` : `${count} of ${this.$radios.length} options for \"${filter}\".`;
-      return this.$alerts.append(`<p role='region' aria-live='polite'>${message}</p>`);
+      this.$alerts.append(`<p role='region' aria-live='polite'>${message}</p>`);
     }
 
     // See https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
@@ -133,8 +133,8 @@
   };
 
   $(document).ready(function() {
-    return $('form').each(function() {
-      return new Autocomplete(this);
+    $('form').each(function() {
+      new Autocomplete(this);
     });
   });
 
