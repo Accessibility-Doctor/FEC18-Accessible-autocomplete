@@ -56,7 +56,7 @@
     attachChangeEventToOptions() {
       return this.$radios.change((e) => {
         this.applyCheckedOptionToInput();
-        return this.$text.select();
+        return this.$text;
       });
     }
 
@@ -113,8 +113,9 @@
     announceOptionsCount(filter = this.$text.val(), count = this.$radios.length) {
       var message;
       this.$alerts.find('p').remove(); // Remove previous alerts
-      message = filter === '' ? `${count} options in total` : `${count} of ${this.$radios.length} options for <kbd>${filter}</kbd>`;
-      return this.$alerts.append(`<p>${message}</p>`);
+      message = filter === '' ? `${count} options in total.` : `${count} of ${this.$radios.length} options for \"${filter}\".`;
+      return this.$alerts.append(`<p role='region' aria-live='polite'>${message}</p>`);
+
     }
 
     // See https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
