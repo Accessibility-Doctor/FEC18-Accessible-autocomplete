@@ -5,3 +5,7 @@ Code for workshop [Complex and accessible JavaScript widgets (with simple HTML)]
 ## Milestone 1: Plain HTML
 
 Codepen: <https://codepen.io/jmuheim/pen/KKWddqz>
+
+## Milestone 2: Providing interactivity
+
+Codepen: <https://codepen.io/jmuheim/pen/KKWddQg>
