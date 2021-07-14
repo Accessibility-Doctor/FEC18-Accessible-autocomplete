@@ -1,10 +1,12 @@
-.visually-hidden, legend, input[type="radio"] {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
+.visually-hidden, #description p:last-child, input[type=radio], legend {
+  /* https://css-tricks.com/inclusively-hidden/ */
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
   height: 1px;
   overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 fieldset {
@@ -15,6 +17,7 @@ fieldset {
   padding: 5px 0;
   margin: -1px 0 0 200px;
   width: 164px;
+  overflow: hidden;
 }
 fieldset label:not([hidden]) {
   display: block;
@@ -40,7 +43,7 @@ fieldset label:not([hidden]):hover, fieldset label:not([hidden]).selected {
   margin: 0;
 }
 
-input[type="text"] {
+input[type=text] {
   width: 160px;
 }
 
@@ -55,7 +58,4 @@ form > label {
 }
 #description p {
   margin-top: 0;
-}
-#description p:last-child {
-  display: none;
 }
