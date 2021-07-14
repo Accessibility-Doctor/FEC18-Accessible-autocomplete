@@ -1,3 +1,3 @@
-# FEC18-Accessible-autocomplete
+# Accessible autocomplete workshop
 
-Code for Workshop [Accessible autocomplete widgets that work for all](https://frontendconf.ch/workshops/creating-an-accessible-autocomplete-widget-thats-working-for-all) at [Frontend Conf 2018](https://frontendconf.ch/) in Zürich, Switzerland.
+Code for workshop [Complex and accessible JavaScript widgets (with simple HTML)](https://slides.com/jmuheim/4-milestones-to-create-an-accessible-widget).
