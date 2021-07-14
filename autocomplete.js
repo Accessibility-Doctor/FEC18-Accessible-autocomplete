@@ -116,7 +116,7 @@
     attachChangeEventToOptions() {
       return this.$radios.change((e) => {
         this.applyCheckedOptionToInput();
-        return this.$text.focus(); //.select()
+        return this.$text.focus();
       });
     }
 
