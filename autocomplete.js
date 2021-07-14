@@ -115,7 +115,6 @@
       this.$alerts.find('p').remove(); // Remove previous alerts
       message = filter === '' ? `${count} options in total.` : `${count} of ${this.$radios.length} options for \"${filter}\".`;
       return this.$alerts.append(`<p role='region' aria-live='polite'>${message}</p>`);
-
     }
 
     // See https://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
