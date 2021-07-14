@@ -174,7 +174,7 @@
     applyFilterToOptions(filter) {
       var fuzzifiedFilter, visibleCount;
       fuzzifiedFilter = this.fuzzifyFilter(filter);
-      visibleCount = 0;
+      visibleCount = 0
       this.$radios.each((i, el) => {
         var $option, $optionContainer, regex;
         $option = $(el);
