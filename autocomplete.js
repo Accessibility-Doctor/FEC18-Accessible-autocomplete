@@ -7,7 +7,7 @@
       this.$text = this.$el.find('input[type="text"]');
       this.$fieldset = this.$el.find('fieldset');
       this.$radios = this.$fieldset.find('input[type="radio"]');
-      this.$alerts = this.$el.find('.alerts');
+      this.$alerts = this.$el.find('#alerts');
       this.applyCheckedOptionToInput();
       this.announceOptionsCount('');
       this.attachEvents();

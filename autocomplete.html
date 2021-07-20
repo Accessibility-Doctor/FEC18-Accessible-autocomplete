@@ -3,9 +3,9 @@
 </p>
 
 <form action="." method="GET">
-  <label for="filter">Programming language</label> <input autocomplete="off" id="filter" name="filter" type="text" />
+  <label for="filter">Programming language</label> <input aria-describedby="description alerts" autocomplete="off" id="filter" name="filter" type="text" />
 
-  <div class="description">
+  <div id="description">
     <p>
       Filter: enter text. Toggle: up/down key or click option below input. Reset: escape key.
     </p>
@@ -13,7 +13,7 @@
 
   <fieldset>
     <legend>Programming languages</legend>
-    <div class="alerts"></div>
+    <div id="alerts"></div>
     <label for="actionscript"><input id="actionscript" name="language" type="radio" value="0" />ActionScript<br /></label>
     <label for="applescript"><input id="applescript" name="language" type="radio" value="1" />AppleScript<br /></label>
     <label for="asp"><input id="asp" name="language" type="radio" value="2" />Asp<br /></label>

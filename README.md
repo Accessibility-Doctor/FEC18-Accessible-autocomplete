@@ -9,3 +9,7 @@ Codepen: <https://codepen.io/jmuheim/pen/KKWddqz>
 ## Milestone 2: Providing interactivity
 
 Codepen: <https://codepen.io/jmuheim/pen/KKWddQg>
+
+## Milestone 3: Enhancing accessibility
+
+Codepen: <https://codepen.io/jmuheim/pen/abJvvGY>
